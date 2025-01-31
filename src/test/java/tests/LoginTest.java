@@ -11,30 +11,15 @@ import tests.base.BaseTest;
 public class LoginTest extends BaseTest {
 
     @Owner("Elizaveta Nikolaenya")
-    @Test(testName = "Login into the application", description = "Check positive login")
-    @Description("Check positive login")
+    @Test(testName = "Login into the application", description = "Verify that a user can log in with valid credentials.")
+    @Description("Verify that a user can successfully log in to the application using valid credentials.")
     public void checkValidLogin() {
-        homePage.open()
-                .isPageOpened()
-                .changeLanguage();
-        loginPage
-                .clickSignInButton()
-                .isPageOpened()
-                .login(user, password);
 
-        boolean isLoginSuccessful = loginPage.successLogin();
-        Assert.assertTrue(isLoginSuccessful, "Your cart is empty");
-    }
-
-    @Owner("Elizaveta Nikolaenya")
-    @Test(testName = "Login into the application", description = "Check positive login")
-    @Description("Check positive login")
-    public void checkValidLogin1() {
         homeStep.openHomePage()
                 .changeLanguage();
         loginStep.login(user, password);
 
-        boolean isLoginSuccessful = loginPage.successLogin();
-        Assert.assertTrue(isLoginSuccessful, "Your cart is empty");
+        boolean isLoginSuccessful = cartPage.successLogin();
+        Assert.assertTrue(isLoginSuccessful, "Login was not successful because the cart button is not visible.");
     }
 }

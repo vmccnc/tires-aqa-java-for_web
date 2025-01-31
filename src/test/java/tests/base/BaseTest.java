@@ -8,10 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import pages.HomePage;
-import pages.LoginPage;
-import pages.RegistrationPage;
-import pages.TiresPage;
+import pages.*;
 import steps.TiresStep;
 import utils.allure.AllureUtils;
 import utils.propertyUtils.PropertyReader;
@@ -33,6 +30,7 @@ public abstract class BaseTest {
     protected HomeStep homeStep;
     protected TiresPage tiresPage;
     protected TiresStep tiresStep;
+    protected CartPage cartPage;
 
     protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
     protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -54,6 +52,7 @@ public abstract class BaseTest {
         homeStep = new HomeStep(driver, baseURL);
         tiresPage = new TiresPage(driver, baseURL);
         tiresStep = new TiresStep(driver, baseURL);
+        cartPage = new CartPage(driver, baseURL);
         log.info("Browser started successfully");
     }
 

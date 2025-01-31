@@ -13,6 +13,9 @@ public class TiresPage extends BasePage {
 
     private final By SEARCH_BUTTON = By.xpath("//button[text()='Search tires']");
     private final By TIRES_LIST = By.xpath("//div[@class='tires-list']");
+    private final By ADD_TO_CART_BUTTON = By.xpath("//button[contains(@class,'card__button')]");
+    private final By ERROR_MESSAGE = By.xpath("//span[normalize-space()='User not authenticated']");
+    private final By SUCCESS_MESSAGE = By.xpath("//span[normalize-space()='Product added to cart!']");
 
     public TiresPage(WebDriver driver, String baseURL) {
         super(driver, baseURL);
@@ -45,5 +48,23 @@ public class TiresPage extends BasePage {
             log.error("Tires list is not opened: {}", e.getMessage());
             return false;
         }
+    }
+
+    public TiresPage clickAddToCart() {
+        log.info("Add to cart");
+        click(ADD_TO_CART_BUTTON);
+        return this;
+    }
+
+    public String errorMessageIsVisible() {
+        log.info("Checking if error message is visible");
+        waitUntilElementBeVisible(ERROR_MESSAGE);
+        return getElementText(ERROR_MESSAGE);
+    }
+
+    public String successMessageIsVisible() {
+        log.info("Checking if success message is visible");
+        waitUntilElementBeVisible(SUCCESS_MESSAGE);
+        return getElementText(SUCCESS_MESSAGE);
     }
 }

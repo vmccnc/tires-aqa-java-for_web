@@ -23,13 +23,13 @@ public class LoginStep {
         log.info("LoginStep initialized with driver: {}", driver);
     }
 
+    @Step("Login with username and password")
     public HomeStep login(String userName, String password) {
         log.info("Starting login process for user: {}", userName);
         try {
             loginPage.clickSignInButton()
                     .isPageOpened()
-                    .login(userName, password)
-                    .isPageOpened();
+                    .login(userName, password);
             log.info("Login process completed for user: {}", userName);
         } catch (Exception e) {
             log.error("Login process failed for user: {}. Error: {}", userName, e.getMessage());

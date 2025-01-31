@@ -202,4 +202,13 @@ public abstract class BasePage {
         log.info("Wait until all elements to visible");
         wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElement(by)));
     }
+
+    protected boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }

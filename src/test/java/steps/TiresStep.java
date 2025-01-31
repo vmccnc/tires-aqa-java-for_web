@@ -16,8 +16,7 @@ public class TiresStep {
         log.info("HomeStep initialized with driver: {}", driver);
     }
 
-
-    @Step("Filling the tires table")
+    @Step("Filling the tires table with input: {tiresInput}")
     public TiresStep fillingTheTiresTable(TiresInput tiresInput) {
         log.info("Filling the tires table with input: {}", tiresInput);
         try {
@@ -28,6 +27,12 @@ public class TiresStep {
             throw e;
         }
         tiresPage.clickSearchTiers();
+        return this;
+    }
+
+    @Step("Adding tires to cart")
+    public TiresStep addingToCart() {
+        tiresPage.clickAddToCart();
         return this;
     }
 }
