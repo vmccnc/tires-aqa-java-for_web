@@ -3,7 +3,6 @@ package steps;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
 

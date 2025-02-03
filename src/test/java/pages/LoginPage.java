@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
-import static org.testng.Assert.assertEquals;
-
 @Log4j2
 public class LoginPage extends BasePage {
 
