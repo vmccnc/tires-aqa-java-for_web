@@ -25,7 +25,7 @@ public class TiresCalculateTest extends BaseTest {
     @Description("Verify that the tires table is filled correctly and the tires list is opened.")
     public void checkFillingTiresTable() {
         homeStep.openHomePage()
-                .changeLanguage();
+                .changeLanguageToEn();
         tiresStep.fillingTheTiresTable(tiresInput);
 
         boolean isTiresListOpened = tiresPage.isTiresListOpened();
@@ -39,7 +39,7 @@ public class TiresCalculateTest extends BaseTest {
             "to the cart without being logged in.")
     public void checkAddToCartIfUserNotLogged() {
         homeStep.openHomePage()
-                .changeLanguage();
+                .changeLanguageToEn();
         tiresStep.fillingTheTiresTable(tiresInput)
                 .addingToCart();
 
@@ -56,7 +56,7 @@ public class TiresCalculateTest extends BaseTest {
         homeStep.openHomePage();
         loginStep.login(user, password)
                 .openHomePage()
-                .changeLanguage();
+                .changeLanguageToEn();
         tiresStep.fillingTheTiresTable(tiresInput)
                 .addingToCart();
 

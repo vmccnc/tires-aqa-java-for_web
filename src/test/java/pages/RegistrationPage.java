@@ -5,8 +5,12 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.base.BasePage;
+
+import java.time.Duration;
 
 @Log4j2
 public class RegistrationPage extends BasePage {
@@ -33,21 +37,23 @@ public class RegistrationPage extends BasePage {
         return this;
     }
 
-    @Step("Opening 'Registration Page'")
     public RegistrationPage open() {
         log.info("Opening Registration Page");
         driver.get(baseURL + "registration");
         return this;
     }
 
-    @Step("Log in to the application with valid credentials - username: {userName}, password: {password}.")
     public RegistrationPage signup(String userName, String surname, String email, String password, String phone) {
-        log.info("Logging in using credentials '{}', '{}'", userName, password);
+        log.info("Signing up with credentials '{}', '{}'", userName, password);
         enter(NAME_INPUT, userName);
         enter(SURNAME_INPUT, surname);
         enter(EMAIL_INPUT, email);
         enter(PASSWORD_INPUT, password);
         enter(PHONE_INPUT, phone);
+        return this;
+    }
+
+    public RegistrationPage clickSignUpButton(){
         click(SIGN_UP_BUTTON);
         return this;
     }

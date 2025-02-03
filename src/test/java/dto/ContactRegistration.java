@@ -9,9 +9,9 @@ import lombok.Data;
 @Builder
 public class ContactRegistration {
 
-    private final String name;
-    private final String surname;
-    private final String email;
-    private final String password;
-    private final String phone;
+    private String name;
+    private String surname;
+    private String email;
+    private String password;
+    private String phone;
 }

@@ -9,6 +9,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import pages.*;
+import steps.RegistrationStep;
 import steps.TiresStep;
 import utils.allure.AllureUtils;
 import utils.propertyUtils.PropertyReader;
@@ -25,6 +26,7 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected RegistrationPage registrationPage;
+    protected RegistrationStep registrationStep;
     protected HomePage homePage;
     protected LoginStep loginStep;
     protected HomeStep homeStep;
@@ -47,6 +49,7 @@ public abstract class BaseTest {
 
         loginPage = new LoginPage(driver, baseURL);
         registrationPage = new RegistrationPage(driver, baseURL);
+        registrationStep = new RegistrationStep(driver, baseURL);
         homePage = new HomePage(driver, baseURL);
         loginStep = new LoginStep(driver, baseURL);
         homeStep = new HomeStep(driver, baseURL);
