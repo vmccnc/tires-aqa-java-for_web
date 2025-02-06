@@ -12,6 +12,7 @@
         <classes>
             <class name="tests.LoginTest"/>
             <class name="tests.TiresCalculateTest"/>
+            <class name="tests.RegistrationTest"/>
         </classes>
     </test>
 
@@ -19,7 +20,6 @@
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.TiresCalculateTest"/>
         </classes>
     </test>
 
@@ -27,7 +27,6 @@
         <parameter name="browser" value="edge"/>
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.TiresCalculateTest"/>
         </classes>
     </test>
 </suite>
