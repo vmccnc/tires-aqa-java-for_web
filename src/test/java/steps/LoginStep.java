@@ -41,25 +41,35 @@ public class LoginStep {
 
     @Step("Open login page")
     public LoginStep openLoginPage() {
+        log.info("Opening the login page.");
         loginPage.open();
         return this;
     }
 
     @Step("Entering email: {userName}")
     public LoginStep enterEmail(String userName) {
+        log.info("Entering email: " + userName);
         loginPage.enterEmail(userName);
         return this;
     }
 
     @Step("Entering password")
     public LoginStep enterPassword(String password) {
+        log.info("Entering password.");
         loginPage.enterPassword(password);
         return this;
     }
 
     @Step("Submitting login")
     public HomeStep submitLogin() {
+        log.info("Submitting login.");
         loginPage.submitLogin();
         return new HomeStep(driver, baseURL);
+    }
+
+    @Step("Verifying error message: {expectedMessage}.")
+    public void verifyErrorMessage(String expectedMessage) {
+        log.info("Verifying error message: {}", expectedMessage);
+        loginPage.verifyErrorMessage(expectedMessage);
     }
 }

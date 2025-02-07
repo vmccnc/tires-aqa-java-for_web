@@ -3,6 +3,8 @@ package tests;
 import dto.TiresInput;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,7 +23,9 @@ public class TiresCalculateTest extends BaseTest {
             .build();
 
     @Owner("Elizaveta Nikolaenya")
-    @Test(testName = "Check filling tires table", description = "Verify that the tires table is filled correctly.")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(testName = "Check filling tires table", description = "Verify that the tires table is filled correctly.",
+            priority = 1)
     @Description("Verify that the tires table is filled correctly and the tires list is opened.")
     public void checkFillingTiresTable() {
         homeStep.openHomePage()
@@ -33,8 +37,9 @@ public class TiresCalculateTest extends BaseTest {
     }
 
     @Owner("Elizaveta Nikolaenya")
+    @Severity(SeverityLevel.NORMAL)
     @Test(testName = "Check add to cart if user not logged", description = "Verify that an error message is displayed " +
-            "when trying to add a tire to the cart without logging in.")
+            "when trying to add a tire to the cart without logging in.", priority = 2)
     @Description("Verify that an error message 'User  not authenticated' is displayed when a user tries to add a tire " +
             "to the cart without being logged in.")
     public void checkAddToCartIfUserNotLogged() {
@@ -44,13 +49,14 @@ public class TiresCalculateTest extends BaseTest {
                 .addingToCart();
 
         String errorMessage = tiresPage.errorMessageIsVisible();
-        Assert.assertEquals(errorMessage, "User  not authenticated", "Expected error message was not " +
+        Assert.assertEquals(errorMessage, "User not authenticated", "Expected error message was not " +
                 "displayed.");
     }
 
     @Owner("Elizaveta Nikolaenya")
+    @Severity(SeverityLevel.NORMAL)
     @Test(testName = "Check add to cart if user logged", description = "Verify that a tire can be added to the cart when " +
-            "the user is logged in.")
+            "the user is logged in.", priority = 3)
     @Description("Verify that a success message is displayed when a logged-in user adds a tire to the cart.")
     public void checkAddToCartIfUserLogged() {
         homeStep.openHomePage();

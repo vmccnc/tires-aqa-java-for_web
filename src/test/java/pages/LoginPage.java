@@ -15,6 +15,9 @@ public class LoginPage extends BasePage {
     private static final By SIGN_IN_HEADER_BUTTON = By.xpath("//button[@class='header__button']");
     private static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']");
     private static final By MY_ACCOUNT = By.xpath("//div[@class='my-account']");
+    private static final By ERROR_MESSAGE_CRED = By.xpath("//p[contains(.,'Firebase: Error (auth/invalid-credential).')]");
+    private static final By ERROR_MESSAGE_PASS = By.xpath("//p[contains(.,'Firebase: Error (auth/missing-password).')]");
+    private static final By ERROR_MESSAGE_EMAIL = By.xpath("//p[contains(.,'Firebase: Error (auth/invalid-email).')]");
 
     public LoginPage(WebDriver driver, String baseURL) {
         super(driver, baseURL);
@@ -60,7 +63,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterEmail(String userName) {
-        log.info("Entering email");
+        log.info("Entering email: {}", userName);
         enter(USERNAME_INPUT, userName);
         return this;
     }
@@ -72,8 +75,39 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage submitLogin() {
-        log.info("Logging in using credentials");
+        log.info("Submitting login");
         click(LOGIN_BUTTON);
         return this;
+    }
+
+    public LoginPage verifyErrorMessage(String expectedMessage) {
+        log.info("Verifying error message: {}", expectedMessage);
+        try {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE_EMAIL),
+                    ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE_CRED),
+                    ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE_PASS)
+            ));
+            String actualMessage = getErrorMessage();
+            if (!actualMessage.equals(expectedMessage)) {
+                log.error("Expected error message: {}, but got: {}", expectedMessage, actualMessage);
+            } else {
+                log.info("Error message verified successfully: {}", actualMessage);
+            }
+        } catch (TimeoutException e) {
+            log.error("Error message did not appear: {}", e.getMessage());
+        }
+        return this;
+    }
+
+    public String getErrorMessage() {
+        if (isElementPresent(ERROR_MESSAGE_EMAIL)) {
+            return driver.findElement(ERROR_MESSAGE_EMAIL).getText();
+        } else if (isElementPresent(ERROR_MESSAGE_CRED)) {
+            return driver.findElement(ERROR_MESSAGE_CRED).getText();
+        } else if (isElementPresent(ERROR_MESSAGE_PASS)) {
+            return driver.findElement(ERROR_MESSAGE_PASS).getText();
+        }
+        return "No error message displayed";
     }
 }

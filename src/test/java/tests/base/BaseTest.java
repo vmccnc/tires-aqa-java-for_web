@@ -9,12 +9,9 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import pages.*;
-import steps.RegistrationStep;
-import steps.TiresStep;
+import steps.*;
 import utils.allure.AllureUtils;
 import utils.propertyUtils.PropertyReader;
-import steps.HomeStep;
-import steps.LoginStep;
 import utils.testngUtils.TestListener;
 
 import static driver.DriverCreation.quitWebDriver;
@@ -33,6 +30,7 @@ public abstract class BaseTest {
     protected TiresPage tiresPage;
     protected TiresStep tiresStep;
     protected CartPage cartPage;
+    protected CartStep cartStep;
 
     protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
     protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -56,6 +54,7 @@ public abstract class BaseTest {
         tiresPage = new TiresPage(driver, baseURL);
         tiresStep = new TiresStep(driver, baseURL);
         cartPage = new CartPage(driver, baseURL);
+        cartStep = new CartStep(driver, baseURL);
         log.info("Browser started successfully");
     }
 

@@ -23,6 +23,7 @@ public class HomePage extends BasePage {
     private final By SIGN_UP_BUTTON_PL = By.xpath("//button[contains(.,'Zarejestruj się ')]");
     private final By SIGN_UP_BUTTON_EN = By.xpath("//button[contains(.,'Sign up ')]");
     private final By SIGN_UP_BUTTON_RU = By.xpath("//button[contains(.,'Зарегистрироваться ')]");
+    private final By CART_BUTTON = By.xpath("//button[@class='info__cart']");
 
     public HomePage(WebDriver driver, String baseURL) {
         super(driver, baseURL);
@@ -80,6 +81,12 @@ public class HomePage extends BasePage {
         } else {
             throw new NoSuchElementException("Sign Up button not found for any language");
         }
+        return this;
+    }
+
+    public HomePage clickOnCartButton() {
+        log.info("Click cart button.");
+        click(CART_BUTTON);
         return this;
     }
 }

@@ -205,9 +205,9 @@ public abstract class BasePage {
 
     protected boolean isElementPresent(By locator) {
         try {
-            driver.findElement(locator);
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
             return true;
-        } catch (NoSuchElementException e) {
+        } catch (TimeoutException e) {
             return false;
         }
     }
