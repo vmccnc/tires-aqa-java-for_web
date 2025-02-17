@@ -6,10 +6,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.base.BasePage;
 
-import java.time.Duration;
 import java.util.List;
 
 @Log4j2
@@ -20,6 +18,7 @@ public class CartPage extends BasePage {
     private static final By DELETE_BUTTON = By.xpath("//button[text()='Delete from cart']");
     private static final By CART = By.xpath("//h1[contains(.,'Your')]");
     private static final By EMPTY_CART = By.xpath("//h1[contains(@class,'_cart_empty')]");
+    private static final By ORDER_BUTTON = By.xpath("//*[contains(@class, '_cart_information_')]/button");
 
     public CartPage(WebDriver driver, String baseURL) {
         super(driver, baseURL);
@@ -32,10 +31,10 @@ public class CartPage extends BasePage {
 
     public CartPage isPageOpened() {
         try {
-            log.info("Checking if Home page is opened");
+            log.info("Checking if Cart page is opened");
             wait.until(ExpectedConditions.visibilityOfElementLocated(CART));
         } catch (TimeoutException e) {
-            log.error("Home page did not open: {}", e.getMessage());
+            log.error("Cart page did not open CartPage: {}", e.getMessage());
             throw e;
         }
         return this;
@@ -90,5 +89,11 @@ public class CartPage extends BasePage {
         log.info("Checking if all items was deleted from cart");
         waitUntilElementBeVisible(EMPTY_CART);
         return getElementText(EMPTY_CART);
+    }
+
+    public CartPage clickOnOrderButton() {
+        log.info("Click on order button");
+        click(ORDER_BUTTON);
+        return this;
     }
 }

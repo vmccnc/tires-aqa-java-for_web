@@ -26,7 +26,7 @@ public class RegistrationPage extends BasePage {
             log.info("Checking if RegistrationPage is opened");
             wait.until(ExpectedConditions.visibilityOfElementLocated(SIGN_UP_BUTTON));
         } catch (TimeoutException e) {
-            log.error("Login page did not open: " + e.getMessage());
+            log.error("Login page did not createOrder: " + e.getMessage());
         }
         waitForPageLoaded(driver);
         return this;

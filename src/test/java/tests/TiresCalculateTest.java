@@ -1,16 +1,15 @@
 package tests;
 
 import dto.TiresInput;
-import io.qameta.allure.Description;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 @Log4j2
+@Epic("Tires Management")
+@Feature("Tires Calculation")
 public class TiresCalculateTest extends BaseTest {
 
     TiresInput tiresInput = TiresInput.builder()

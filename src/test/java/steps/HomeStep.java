@@ -12,58 +12,36 @@ public class HomeStep {
 
     public HomeStep(WebDriver driver, String baseURL) {
         this.homePage = new HomePage(driver, baseURL);
-        log.info("HomeStep initialized with driver: {}", driver);
     }
 
     @Step("Open the Home page")
     public HomeStep openHomePage() {
-        log.info("Opening Home page");
-        try {
-            homePage.open().isPageOpened();
-            log.info("Home page opened");
-        } catch (Exception e) {
-            log.error("Failed to open Home page: {}", e.getMessage());
-            throw e;
-        }
+        homePage.openHomePage()
+                .isPageOpened();
         return this;
     }
 
     @Step("Change language to English")
     public HomeStep changeLanguageToEn() {
-        log.info("Changing language");
-        try {
-            homePage.changeLanguageToEN();
-            log.info("Language changed to English");
-        } catch (Exception e) {
-            log.error("Failed to change language: {}", e.getMessage());
-            throw e;
-        }
+        homePage.changeLanguageToEN();
         return this;
     }
 
     @Step("Click 'Sign In' button")
-    public HomeStep clickSignInButton() {
-        log.info("Clicking 'Sign In' button");
-        try {
-            homePage.clickSignInButton();
-            log.info("'Sign In' button clicked");
-        } catch (Exception e) {
-            log.error("Failed to click 'Sign In' button: {}", e.getMessage());
-            throw e;
-        }
+    public HomeStep clickOnSignInButton() {
+        homePage.clickSignInButton();
         return this;
     }
 
     @Step("Click 'Sign Up' button")
-    public HomeStep clickSignUpButton() {
-        log.info("Clicking 'Sign Up' button");
-        try {
-            homePage.clickSignUpButton();
-            log.info("'Sign Up' button clicked");
-        } catch (Exception e) {
-            log.error("Failed to click 'Sign Up' button: {}", e.getMessage());
-            throw e;
-        }
+    public HomeStep clickOnSignUpButton() {
+        homePage.clickSignUpButton();
+        return this;
+    }
+
+    @Step("Click on 'Cart' button")
+    public HomeStep clickOnCartButton() {
+        homePage.clickOnCartButton();
         return this;
     }
 }

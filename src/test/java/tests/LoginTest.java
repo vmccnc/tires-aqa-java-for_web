@@ -1,9 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -11,6 +8,8 @@ import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 @Log4j2
+@Epic("Tests on Login")
+@Feature("User Authentication")
 public class LoginTest extends BaseTest {
 
     @Owner("Elizaveta Nikolaenya")
@@ -30,18 +29,17 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "LoginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {user, "", "Firebase: Error (auth/missing-password)."}, // Отсутствует пароль
-                {"", password, "Firebase: Error (auth/invalid-email)."}, // Отсутствует email
-                {"test@gmail.com", password, "Firebase: Error (auth/invalid-credential)."}, // Неверный email
-                {user, "wrongPassword", "Firebase: Error (auth/invalid-credential)."}, // Неверный пароль
-                {"test@gmail.com", "wrongPassword", "Firebase: Error (auth/invalid-credential)."} // Неверные учетные данные
+                {user, "", "Firebase: Error (auth/missing-password)."},
+                {"", password, "Firebase: Error (auth/invalid-email)."},
+                {"test@gmail.com", password, "Firebase: Error (auth/invalid-credential)."},
+                {user, "wrongPassword", "Firebase: Error (auth/invalid-credential)."},
+                {"test@gmail.com", "wrongPassword", "Firebase: Error (auth/invalid-credential)."}
         };
     }
 
     @Owner("Elizaveta Nikolaenya")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "LoginData", testName = "Invalid login data", description = "Check that user cannot login" +
-            " with invalid data")
+    @Test(dataProvider = "LoginData", testName = "Invalid login data", description = "Check that user cannot log in with invalid data.")
     @Description("Negative login check")
     public void checkInvalidLogin(String user, String password, String expectedErrorMessage) {
         loginStep.openLoginPage()
