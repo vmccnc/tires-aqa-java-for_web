@@ -31,6 +31,8 @@ public abstract class BaseTest {
     protected TiresStep tiresStep;
     protected CartPage cartPage;
     protected CartStep cartStep;
+    protected OrderPage orderPage;
+    protected OrderStep orderStep;
 
     protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
     protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -55,6 +57,8 @@ public abstract class BaseTest {
         tiresStep = new TiresStep(driver, baseURL);
         cartPage = new CartPage(driver, baseURL);
         cartStep = new CartStep(driver, baseURL);
+        orderPage = new OrderPage(driver, baseURL);
+        orderStep = new OrderStep(driver, baseURL);
         log.info("Browser started successfully");
     }
 

@@ -24,7 +24,7 @@ public class DriverCreation {
                 case CHROME:
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments(PropertyReader.getProperty("browser.option").split(";"));
-                    chromeOptions.addArguments("--headless");
+//                    chromeOptions.addArguments("--headless");
                     webDriver.set(new ChromeDriver(chromeOptions));
                     break;
                 case FIREFOX:

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class ContactRegistration {
+public class AccountRegistration {
 
     private String name;
     private String surname;

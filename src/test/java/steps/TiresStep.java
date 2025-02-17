@@ -4,29 +4,26 @@ import dto.TiresInput;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
+import pages.HomePage;
 import pages.TiresPage;
 
 @Log4j2
 public class TiresStep {
 
     private final TiresPage tiresPage;
+    private HomePage homePage;
+    private LoginStep loginStep;
 
     public TiresStep(WebDriver driver, String baseURL) {
         this.tiresPage = new TiresPage(driver, baseURL);
-        log.info("HomeStep initialized with driver: {}", driver);
+        this.homePage = new HomePage(driver, baseURL);
+        this.loginStep = new LoginStep(driver, baseURL);
     }
 
     @Step("Filling the tires table with input: {tiresInput}")
     public TiresStep fillingTheTiresTable(TiresInput tiresInput) {
-        log.info("Filling the tires table with input: {}", tiresInput);
-        try {
-            tiresPage.fillingTheTiresTable(tiresInput);
-            log.info("Tires table filled successfully");
-        } catch (Exception e) {
-            log.error("Failed to fill the tires table: {}", e.getMessage());
-            throw e;
-        }
-        tiresPage.clickSearchTiers();
+        tiresPage.fillingTheTiresTable(tiresInput)
+                .clickSearchTiers();
         return this;
     }
 
@@ -34,5 +31,15 @@ public class TiresStep {
     public TiresStep addingToCart() {
         tiresPage.clickAddToCart();
         return this;
+    }
+
+    @Step("Login and add tires to cart")
+    public void loginAndAddTiresToCart(String user, String password, TiresInput tiresInput) {
+        homePage.openHomePage();
+        loginStep.login(user, password)
+                .openHomePage()
+                .changeLanguageToEn();
+        fillingTheTiresTable(tiresInput)
+                .addingToCart();
     }
 }

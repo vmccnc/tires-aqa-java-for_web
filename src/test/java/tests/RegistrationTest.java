@@ -1,21 +1,20 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import dto.ContactRegistration;
-import io.qameta.allure.Description;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import dto.AccountRegistration;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 @Log4j2
+@Epic("Registration")
+@Feature("Account Creation")
 public class RegistrationTest extends BaseTest {
 
     Faker faker = new Faker();
-    ContactRegistration contactRegistration = ContactRegistration.builder()
+    AccountRegistration accountRegistration = AccountRegistration.builder()
             .name("testAQA" + faker.name().firstName())
             .surname(faker.name().lastName())
             .email(faker.internet().emailAddress())
@@ -28,7 +27,7 @@ public class RegistrationTest extends BaseTest {
     @Test(testName = "Create a new account", description = "Verify that a new account can be created with valid data")
     @Description("Creating a new account with valid data")
     public void checkCreateNewAccount() {
-        registrationStep.create(contactRegistration);
+        registrationStep.create(accountRegistration);
 
         boolean isLoginPageOpened = loginPage.isPageOpenedAfterRegistration();
 

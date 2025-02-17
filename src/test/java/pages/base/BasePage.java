@@ -211,4 +211,49 @@ public abstract class BasePage {
             return false;
         }
     }
+
+    protected void selectRadioButton(By by) {
+        log.info("Select radio button - " + by);
+        WebElement radioButton = driver.findElement(by);
+        if (!radioButton.isSelected()) {
+            radioButton.click();
+        }
+    }
+
+    protected void selectRadioButton(WebElement element) {
+        log.info("Select radio button - " + element);
+        if (!element.isSelected()) {
+            element.click();
+        }
+    }
+
+    protected void checkCheckbox(By by) {
+        log.info("Check checkbox - " + by);
+        WebElement checkbox = driver.findElement(by);
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
+
+    protected void checkCheckbox(WebElement element) {
+        log.info("Check checkbox - " + element);
+        if (!element.isSelected()) {
+            element.click();
+        }
+    }
+
+    protected void uncheckCheckbox(By by) {
+        log.info("Uncheck checkbox - " + by);
+        WebElement checkbox = driver.findElement(by);
+        if (checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
+
+    protected void uncheckCheckbox(WebElement element) {
+        log.info("Uncheck checkbox - " + element);
+        if (element.isSelected()) {
+            element.click();
+        }
+    }
 }

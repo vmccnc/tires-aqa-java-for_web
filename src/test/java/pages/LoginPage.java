@@ -28,7 +28,7 @@ public class LoginPage extends BasePage {
             log.info("Checking if LoginPage is opened");
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException e) {
-            log.error("Login page did not open: {}", e.getMessage());
+            log.error("Login page did not createOrder: {}", e.getMessage());
         }
         waitForPageLoaded(driver);
         return this;
@@ -42,7 +42,7 @@ public class LoginPage extends BasePage {
             log.info("LoginPage is successfully opened.");
             return true;
         } catch (TimeoutException e) {
-            log.error("Login page did not open after registration: {}", e.getMessage());
+            log.error("Login page did not createOrder after registration: {}", e.getMessage());
             return false;
         }
     }

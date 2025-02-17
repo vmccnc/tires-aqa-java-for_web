@@ -20,8 +20,12 @@ public class CartStep {
 
     @Step("Deleting all tires from cart")
     public void deleteAllTiresFromCart() {
-        log.info("Starting deleting all items.");
         cartPage.isPageOpened()
                 .deleteAllItemsFromCart();
+    }
+
+    @Step("Click on 'Order now' button")
+    public void clickOnOrderButton() {
+        cartPage.clickOnOrderButton();
     }
 }

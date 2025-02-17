@@ -34,13 +34,13 @@ public class HomePage extends BasePage {
             log.info("Checking if Home page is opened");
             wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BUTTON_PL));
         } catch (TimeoutException e) {
-            log.error("Home page did not open: {}", e.getMessage());
+            log.error("Home page did not createOrder: {}", e.getMessage());
             throw e;
         }
         return this;
     }
 
-    public HomePage open() {
+    public HomePage openHomePage() {
         log.info("Opening Home page");
         driver.get(baseURL);
         return this;
