@@ -25,7 +25,8 @@ public class LoginStep {
 
     @Step("Login with username and password")
     public HomeStep login(String userName, String password) {
-        homeStep.clickOnSignInButton();
+        homeStep.openHomePage()
+        .clickOnSignInButton();
         loginPage.isPageOpened()
                 .login(userName, password);
         return new HomeStep(driver, baseURL);

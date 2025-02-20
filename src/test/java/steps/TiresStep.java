@@ -34,12 +34,17 @@ public class TiresStep {
     }
 
     @Step("Login and add tires to cart")
-    public void loginAndAddTiresToCart(String user, String password, TiresInput tiresInput) {
+    public TiresStep loginAndAddTiresToCart(String user, String password, TiresInput tiresInput) {
         homePage.openHomePage();
         loginStep.login(user, password)
                 .openHomePage()
                 .changeLanguageToEn();
         fillingTheTiresTable(tiresInput)
                 .addingToCart();
+        return this;
+    }
+
+    public String getSuccessMessage() {
+        return tiresPage.successMessageIsVisible();
     }
 }
