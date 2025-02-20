@@ -9,23 +9,33 @@ import pages.CartPage;
 public class CartStep {
 
     private final CartPage cartPage;
-    private final WebDriver driver;
-    private final String baseURL;
 
     public CartStep(WebDriver driver, String baseURL) {
-        this.driver = driver;
         this.cartPage = new CartPage(driver, baseURL);
-        this.baseURL = baseURL;
     }
 
     @Step("Deleting all tires from cart")
-    public void deleteAllTiresFromCart() {
+    public CartStep deleteAllItemsFromCart() {
         cartPage.isPageOpened()
                 .deleteAllItemsFromCart();
+        return this;
     }
 
-    @Step("Click on 'Order now' button")
-    public void clickOnOrderButton() {
+    @Step("Ensuring the cart is empty")
+    public CartStep ensureCartIsEmpty() {
+        cartPage.isPageOpened()
+                .ensureCartIsEmpty();
+        return this;
+    }
+
+    @Step("Clicking on 'Order now' button")
+    public CartStep clickOnOrderButton() {
         cartPage.clickOnOrderButton();
+        return this;
+    }
+
+    @Step("Getting cart empty message")
+    public String getCartEmptyMessage() {
+        return cartPage.cartIsEmpty();
     }
 }

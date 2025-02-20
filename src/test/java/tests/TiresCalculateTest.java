@@ -5,6 +5,7 @@ import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import tests.base.BaseTest;
 
 @Log4j2
@@ -58,15 +59,26 @@ public class TiresCalculateTest extends BaseTest {
             "the user is logged in.", priority = 3)
     @Description("Verify that a success message is displayed when a logged-in user adds a tire to the cart.")
     public void checkAddToCartIfUserLogged() {
-        homeStep.openHomePage();
-        loginStep.login(user, password)
-                .openHomePage()
+        SoftAssert softAssert = new SoftAssert();
+
+        loginStep.login(user, password);
+
+        cartStep.ensureCartIsEmpty();
+
+        homeStep.openHomePage()
                 .changeLanguageToEn();
         tiresStep.fillingTheTiresTable(tiresInput)
                 .addingToCart();
 
-        String successMessage = tiresPage.successMessageIsVisible();
-        Assert.assertEquals(successMessage, "Product added to cart!", "Expected success message was not " +
-                "displayed.");
+        String successMessage = tiresStep.getSuccessMessage();
+        softAssert.assertEquals(successMessage, "Product added to cart!", "Expected success message was not displayed.");
+
+        homeStep.clickOnCartButton();
+        cartStep.deleteAllItemsFromCart();
+
+        String emptyCartMessage = cartStep.getCartEmptyMessage();
+        softAssert.assertEquals(emptyCartMessage, "Your cart is empty", "Cart is not empty after removing the item.");
+
+        softAssert.assertAll();
     }
 }

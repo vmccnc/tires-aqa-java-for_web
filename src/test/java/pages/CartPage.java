@@ -15,10 +15,10 @@ public class CartPage extends BasePage {
 
     private static final By MY_ACCOUNT_BUTTON = By.xpath("//div[@class='my-account']");
     private static final By CART_BUTTON = By.xpath("//button[@class='info__cart']");
-    private static final By DELETE_BUTTON = By.xpath("//button[text()='Delete from cart']");
-    private static final By CART = By.xpath("//h1[contains(.,'Your')]");
+    private static final By DELETE_BUTTON = By.xpath("//button[contains(@class,'_cart_trash_')]");
     private static final By EMPTY_CART = By.xpath("//h1[contains(@class,'_cart_empty')]");
     private static final By ORDER_BUTTON = By.xpath("//*[contains(@class, '_cart_information_')]/button");
+    private static final By CART_ITEMS = By.xpath("//div[contains(@class,'_cart_items')]");
 
     public CartPage(WebDriver driver, String baseURL) {
         super(driver, baseURL);
@@ -32,9 +32,13 @@ public class CartPage extends BasePage {
     public CartPage isPageOpened() {
         try {
             log.info("Checking if Cart page is opened");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(CART));
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOfElementLocated(DELETE_BUTTON),
+                    ExpectedConditions.visibilityOfElementLocated(EMPTY_CART)
+            ));
+            log.info("Cart page is opened");
         } catch (TimeoutException e) {
-            log.error("Cart page did not open CartPage: {}", e.getMessage());
+            log.error("Cart page did not open: {}", e.getMessage());
             throw e;
         }
         return this;
@@ -64,6 +68,17 @@ public class CartPage extends BasePage {
         return this;
     }
 
+    public CartPage ensureCartIsEmpty() {
+        log.info("Ensuring the cart is empty");
+        if (!isCartEmpty()) {
+            deleteAllItemsFromCart();
+        }
+        return this;
+    }
+
+    private boolean isCartEmpty() {
+        return driver.findElements(CART_ITEMS).isEmpty();
+    }
 
     public CartPage deleteItemByName(String itemName) {
         log.info("Attempting to delete item: " + itemName);
@@ -86,7 +101,7 @@ public class CartPage extends BasePage {
     }
 
     public String cartIsEmpty() {
-        log.info("Checking if all items was deleted from cart");
+        log.info("Checking if all items were deleted from cart");
         waitUntilElementBeVisible(EMPTY_CART);
         return getElementText(EMPTY_CART);
     }
