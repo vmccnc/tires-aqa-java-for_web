@@ -26,7 +26,6 @@ public class OrderTest extends BaseTest {
     Faker faker = new Faker();
     OrderInput orderInformation = OrderInput.builder()
             .fullname("testAQA" + faker.name().firstName())
-            .email("testaqa26@gmail.com")
             .phone(faker.phoneNumber().phoneNumber())
             .address(faker.address().fullAddress())
             .city(faker.address().city())

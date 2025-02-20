@@ -4,6 +4,7 @@ import dto.TiresInput;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
+import pages.CartPage;
 import pages.HomePage;
 import pages.TiresPage;
 
@@ -13,11 +14,13 @@ public class TiresStep {
     private final TiresPage tiresPage;
     private HomePage homePage;
     private LoginStep loginStep;
+    private CartStep cartStep;
 
     public TiresStep(WebDriver driver, String baseURL) {
         this.tiresPage = new TiresPage(driver, baseURL);
         this.homePage = new HomePage(driver, baseURL);
         this.loginStep = new LoginStep(driver, baseURL);
+        this.cartStep = new CartStep(driver, baseURL);
     }
 
     @Step("Filling the tires table with input: {tiresInput}")
@@ -36,9 +39,10 @@ public class TiresStep {
     @Step("Login and add tires to cart")
     public TiresStep loginAndAddTiresToCart(String user, String password, TiresInput tiresInput) {
         homePage.openHomePage();
-        loginStep.login(user, password)
-                .openHomePage()
-                .changeLanguageToEn();
+        loginStep.login(user, password);
+        cartStep.ensureCartIsEmpty();
+        homePage.openHomePage()
+                .changeLanguageToEN();
         fillingTheTiresTable(tiresInput)
                 .addingToCart();
         return this;

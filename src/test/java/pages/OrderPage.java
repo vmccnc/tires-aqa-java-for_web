@@ -3,11 +3,9 @@ package pages;
 import dto.OrderInput;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.base.BasePage;
-import wrappers.OrderInputWrapper;
 
 import java.time.Duration;
 import java.util.Map;
@@ -60,7 +58,6 @@ public class OrderPage extends BasePage {
 
         Map<String, String> fields = Map.of(
                 "fullname", orderInformation.getFullname(),
-                "email", orderInformation.getEmail(),
                 "phone", orderInformation.getPhone(),
                 "address", orderInformation.getAddress(),
                 "city", orderInformation.getCity(),
