@@ -111,6 +111,7 @@ public class OrderPage extends BasePage {
             log.info("Attempting to switch to alert to get its text.");
             Alert alert = driver.switchTo().alert();
             String alertMessage = alert.getText();
+            alert.accept();
             log.info("Alert text retrieved: {}", alertMessage);
             return alertMessage;
         } catch (NoAlertPresentException e) {

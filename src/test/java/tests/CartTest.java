@@ -19,7 +19,8 @@ public class CartTest extends BaseTest {
         homeStep.openHomePage();
         loginStep.login(user, password)
                 .changeLanguageToEn();
-        cartStep.deleteAllItemsFromCart();
+        cartStep.ensureCartIsEmpty()
+                .deleteAllItemsFromCart();
 
         String cartIsEmpty = cartPage.cartIsEmpty();
         Assert.assertEquals(cartIsEmpty, "Your cart is empty", "Expected error message was not " +
