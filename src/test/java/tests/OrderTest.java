@@ -7,6 +7,7 @@ import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import tests.base.BaseTest;
 
 @Log4j2
@@ -38,6 +39,7 @@ public class OrderTest extends BaseTest {
     @Test(testName = "Create Order", description = "Verify that an order can be created with valid data.")
     @Description("Creating a new order with valid data and verifying the order is successful.")
     public void checkCreateOrder() {
+        SoftAssert softAssert = new SoftAssert();
         tiresStep.loginAndAddTiresToCart(user, password, tiresInput);
         homeStep.clickOnCartButton();
         cartStep.clickOnOrderButton();
@@ -49,10 +51,12 @@ public class OrderTest extends BaseTest {
                 .submitOrder();
 
         String alertText = orderPage.getAlertText();
-        Assert.assertNotNull(alertText, "Alert should be present");
+        softAssert.assertNotNull(alertText, "Alert should be present");
 
         String expectedPattern = "Your order has been successfully placed! Order ID: \\d+";
-        Assert.assertTrue(alertText.matches(expectedPattern), "Alert message does not match the expected pattern");
+        softAssert.assertTrue(alertText.matches(expectedPattern), "Alert message does not match the expected pattern");
+
+        softAssert.assertAll();
     }
 }
 
